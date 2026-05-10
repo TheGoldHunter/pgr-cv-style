@@ -1,0 +1,223 @@
+:root {
+    --bg-dark: #0a0a0a;
+    --card-bg: #111111;
+    --pgr-red: #ff0033;
+    --text-gray: #b0b0b0;
+    --white: #ffffff;
+    --border-gray: #222;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--white);
+    font-family: 'Roboto Mono', monospace;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* --- CONSISTENCY UPDATE --- */
+.navbar {
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 10%; /* Matches Image 1 positioning */
+    background: rgba(10, 10, 10, 0.98);
+    border-bottom: 2px solid #ff0033; /* The exact PGR red from style.css */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+}
+
+/* Ensure the _OS part uses the exact red */
+.logo span { 
+    color: #ff0033; 
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li a {
+    color: var(--white);
+    text-decoration: none;
+    margin-left: 2rem; /* Matches the desktop override in style.css */
+    font-size: 0.9rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* The "Unique Red" Glow - matching style.css perfectly */
+.nav-links li a:hover, 
+.nav-links li a.active {
+    color: #ff0033;
+    text-shadow: 0 0 8px #ff0033; /* Matches the glow effect in style.css */
+}
+
+/* Mobile Fix: Ensuring it stays consistent when screen shrinks */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+    }
+    
+    .nav-links {
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .nav-links li a {
+        margin: 0 10px;
+        font-size: 0.75rem;
+    }
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+}
+
+.identity-header {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-gray);
+}
+
+.profile-container {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.profile-frame {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    border: 2px solid var(--pgr-red);
+    box-shadow: 0 0 15px rgba(255, 0, 51, 0.3);
+}
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(30%) contrast(110%);
+}
+
+.scanner-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--pgr-red);
+    box-shadow: 0 0 10px var(--pgr-red);
+    animation: scan 4s infinite linear;
+}
+
+@keyframes scan {
+    0% { top: 0; }
+    50% { top: 100%; }
+    100% { top: 0; }
+}
+
+.header-text h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.id-tag {
+    color: var(--pgr-red);
+    letter-spacing: 4px;
+    font-size: 0.8rem;
+}
+
+.identity-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.card {
+    background: var(--card-bg);
+    padding: 1.8rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-gray);
+    border-left: 3px solid var(--pgr-red);
+}
+
+.section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    color: var(--pgr-red);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+}
+
+.red-box {
+    width: 10px;
+    height: 10px;
+    background: var(--pgr-red);
+    margin-right: 12px;
+}
+
+.data-list { list-style: none; }
+.data-list li { margin-bottom: 0.8rem; font-size: 0.85rem; }
+.data-list strong { color: var(--pgr-red); margin-right: 5px; }
+
+.log-entry {
+    margin-bottom: 1.2rem;
+    padding-left: 1rem;
+    border-left: 1px solid var(--pgr-red);
+}
+
+.year { font-size: 0.7rem; color: var(--pgr-red); }
+.desc { color: var(--text-gray); font-size: 0.8rem; margin-top: 4px; }
+
+.skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.tag {
+    background: #1a1a1a;
+    border: 1px solid var(--pgr-red);
+    padding: 4px 10px;
+    font-size: 0.7rem;
+    color: var(--white);
+}
+
+.fade-element {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease-out;
+}
+
+.fade-element.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+    .identity-grid { grid-template-columns: 1fr; }
+    .profile-container { flex-direction: column; text-align: center; }
+    .navbar { flex-direction: column; gap: 1rem; }
+    .nav-links li a { margin: 0 10px; }
+}
